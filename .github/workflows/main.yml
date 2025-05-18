@@ -1,0 +1,28 @@
+name: Nebus Test App
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  docker-job:
+    runs-on: germany
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Create .env file
+        run: echo "$ENV_FILE" > .env
+        env:
+          ENV_FILE: ${{ secrets.ENV_FILE }}
+
+      - name: Run tests in Docker
+        run: docker compose run --rm test
+
+      - name: Run Docker Compose
+        run: docker compose up -d --build
+
+      - name: List all Docker containers
+        run: docker ps -a

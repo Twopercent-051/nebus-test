@@ -1,0 +1,25 @@
+services:
+
+  test:
+    image: nebus_test_app
+    command: sh -c "alembic upgrade head && PYTHONPATH=. pytest ."
+    environment:
+      - ".env"
+
+
+  app:
+    image: nebus_test_app
+    container_name: nebus_test_app
+    stop_signal: SIGINT
+    build:
+      context: .
+    logging:
+      options:
+        max-file: "5"
+        max-size: "3m"
+    command: python3 -m main
+    restart: unless-stopped
+    ports:
+       - "${OUTER_PORT}:${INNER_PORT}"
+    environment:
+      - ".env"
