@@ -2,6 +2,7 @@ services:
 
   test:
     image: nebus_test_app
+    container_name: nebus_test_test
     build:
       context: .
     command: sh -c "alembic upgrade head && PYTHONPATH=. pytest ."
