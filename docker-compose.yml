@@ -2,6 +2,8 @@ services:
 
   test:
     image: nebus_test_app
+    build:
+      context: .
     command: sh -c "alembic upgrade head && PYTHONPATH=. pytest ."
     environment:
       - ".env"
