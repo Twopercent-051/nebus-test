@@ -108,7 +108,7 @@ class TestByTitle:
     @pytest.mark.asyncio
     async def test_found(self):
         expected_title = 'ООО "Ромашка"'
-        organizations = await OrganizationsService.get_by_title(find_title='ОоОg "РомАшка"')
+        organizations = await OrganizationsService.get_by_title(find_title='ОоО "РомАшка"')
         assert organizations.data
         assert organizations.error is None
         assert expected_title in [org.title for org in organizations.data]
