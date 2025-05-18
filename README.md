@@ -21,26 +21,26 @@
 ## Использование собственной базы данных PostgreSQL
 
 По умолчанию предполагается использование внешней БД PostgreSQL. Если хотите развернуть PostgreSQL в контейнере, добавьте сервис в `docker-compose.yml`:
-    ```yaml
-    postgres:
-        image: postgres:17
-        container_name: test_secrets_postgres
-        env_file:
-          - .env
-        volumes:
-          - postgres_data:/var/lib/postgresql/data
-        restart: unless-stopped
-    ```
-   И определите volume:
-    ```yaml
+```yaml
+postgres:
+    image: postgres:17
+    container_name: test_secrets_postgres
+    env_file:
+      - .env
     volumes:
-      postgres_data:
-    ```
-   Добавьте зависимость в сервис 'app':
-    ```yaml
-    depends_on:
-      - postgres
-    ```
+      - postgres_data:/var/lib/postgresql/data
+    restart: unless-stopped
+```
+И определите volume:
+```yaml
+volumes:
+  postgres_data:
+```
+Добавьте зависимость в сервис 'app':
+```yaml
+depends_on:
+  - postgres
+```
    
 ## Примечания
 
