@@ -31,13 +31,12 @@ class TestByActivityId:
         assert organizations.error is None
         assert expected_title in [org.title for org in organizations.data]
 
-
-@pytest.mark.asyncio
-async def test_not_found(self):
-    organizations = await OrganizationsService.get_by_activity_id(activity_id=999999)
-    assert organizations.data is None
-    assert organizations.error
-    assert organizations.status_code == 404
+    @pytest.mark.asyncio
+    async def test_not_found(self):
+        organizations = await OrganizationsService.get_by_activity_id(activity_id=999999)
+        assert organizations.data is None
+        assert organizations.error
+        assert organizations.status_code == 404
 
 
 class TestByBoundingBox:
