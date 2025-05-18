@@ -19,7 +19,7 @@ jobs:
           ENV_FILE: ${{ secrets.ENV_FILE }}
 
       - name: Run tests in Docker
-        run: docker compose run --rm test
+        run: docker compose run --rm --build test
 
       - name: Run Docker Compose
         run: docker compose up -d --build
