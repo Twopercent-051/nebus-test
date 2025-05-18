@@ -5,8 +5,9 @@ services:
     build:
       context: .
     command: sh -c "alembic upgrade head && PYTHONPATH=. pytest ."
-    environment:
-      - ".env"
+    env_file:
+      - .env
+
 
 
   app:
@@ -23,5 +24,6 @@ services:
     restart: unless-stopped
     ports:
        - "${OUTER_PORT}:${INNER_PORT}"
-    environment:
-      - ".env"
+    env_file:
+      - .env
+
